@@ -8,8 +8,9 @@ Approaches or solutions that have been tried before on similar projects.
 - by: Yumeng Li, Rachel M. Koldenhoven, Nigel C. Jiwan, Jieyun Zhan & Ting Liu, in: SPORTS BIOMECHANICS 2025, VOL. 24, NO. 12, 3557–3569
 
   - **[[Link](https://doi.org/10.1080/14763141.2025.2528885)]()**
-  - **Objective**: "The purpose of the study was to assign rowers to different rowing events based on their demographics and rowing kinematics using machine learning models."
-  - **Methods**:
+  - **Objective**: assigning rowers to different rowing events (8+ and <=2 event groups) based on their demographics, rowing kinematics and coordination features
+  - **Methods**: 7 synchronised IMUs (inertial measurement units) were affixed to participants’ bodies, specifically on the pelvis, lumbar spine, thoracic spine, scapulas, and upper arms. IMU sensors were equipped with a three-dimensional accelerometer, gyroscope, and magnetometer. They were utilised to monitor the angular orientation of body segments in absolute space.
+  - TO-DO: which ML models were used?
   - **Outcomes**:
   - **Relation to the Project**:
 
