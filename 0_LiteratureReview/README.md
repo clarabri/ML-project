@@ -7,8 +7,7 @@ Approaches or solutions that have been tried before on similar projects.
 - **Source 1**: Automated rowing event assignment: a machine learning approach
 - by: Yumeng Li, Rachel M. Koldenhoven, Nigel C. Jiwan, Jieyun Zhan & Ting Liu, in: SPORTS BIOMECHANICS 2025, VOL. 24, NO. 12, 3557–3569
 
-  - **[[Link]([https://www.tandfonline.com/doi/full/10.1080/14763141.2025.2528885)](https://doi.org/10.1080/14763141.2025.2528885
-)]()**
+  - **[[Link](https://doi.org/10.1080/14763141.2025.2528885)]()**
   - **Objective**: "The purpose of the study was to assign rowers to different rowing events based on their demographics and rowing kinematics using machine learning models."
   - **Methods**:
   - **Outcomes**:
