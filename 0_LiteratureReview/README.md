@@ -7,10 +7,9 @@ Approaches and solutions that have been applied in similar projects.
 
 ---
 
-- **Source 1**: [Automated Rowing Event Assignment)]
-- **Journal:** *Sports Biomechanics*
+- **Source 1**: [Automated Rowing Event Assignment, Li et al. 2025]
   
-  - **[[Li et al. 2025](https://doi.org/10.1080/14763141.2025.2528885)]()**
+  - **[Link](https://doi.org/10.1080/14763141.2025.2528885)**
   - **Objective**: Classify rowers into **8+** vs. **≤ 2** using:
     - demographics, rowing kinematics, coordination features
   - **Methods**:
@@ -26,10 +25,9 @@ Approaches and solutions that have been applied in similar projects.
       
 ---
 
-- **Source 2**: [Analysis of indoor rowing motion using wearable inertial sensors]
-- **Journal:** Proceedings of the 10th EAI International Conference on Body Area Networks
+- **Source 2**: [Analysis of indoor rowing motion using wearable inertial sensors, Bosch et al. 2015]
 
-  - **[Bosch et al. 2015](https://doi.org/10.4108/eai.28-9-2015.2261465)**
+  - **[Link](https://doi.org/10.4108/eai.28-9-2015.2261465)**
   - **Objective**: Distinguishing between experienced and novice rowers 
   - **Methods**:
   - **Outcomes**:
