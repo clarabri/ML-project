@@ -60,13 +60,21 @@ Approaches and solutions that have been applied in similar projects.
 
 Model Performance Comparison
 
-| Model                | Accuracy (Non-Skeletonized) | Accuracy (Skeletonized) |
-|---------------------|----------------------------|--------------------------|
-| VGG16               | **95.6%**                  | 2nd best                 |
-| InceptionV3         | ~90%                       | Lowest                   |
-| NASNetMobile        | ~90%                       | 4th                      |
-| InceptionResNetV2   | Lowest                     | 3rd                      |
-| YogaConvo2d (proposed) | 89.9%                   | **99.62% (best)**        |
+## Model Performance Comparison
+
+| Rank | Model                  | Accuracy (Skeletonized) | Accuracy (Non-Skeletonized) |
+|------|------------------------|--------------------------|------------------------------|
+| 1    | YogaConvo2d (proposed) | **99.62%**               | 89.9%                        |
+| 2    | VGG16                  | 97.36%                   | **95.6%**                    |
+| 3    | InceptionResNetV2      | 96.6%                    | 89.3%                        |
+| 4    | NASNetMobile           | 96.23%                   | 94.31%                       |
+| 5    | InceptionV3            | 95.09%                   | 94.98%                       |
+
+---
+
+### Key Insight
+- Skeletonization improves performance across models  
+- **YogaConvo2d** shows the strongest gain and overall best result  
 
 
   - **Relation to the Project**:
