@@ -7,6 +7,36 @@ Approaches and solutions that have been applied in similar projects.
 
 ---
 
+## Source 1: Automated Rowing Event Assignment (Li et al., 2025)
+
+**Journal:** *Sports Biomechanics*  
+🔗 https://doi.org/10.1080/14763141.2025.2528885  
+
+---
+
+### Objective
+Classify rowers into **8+** vs. **≤ 2** using:
+- demographics, kinematics, coordination
+
+---
+
+### Methods
+- **Data:** 7 IMUs (body segment orientation)  
+- **Models:** Logistic Regression, Decision Tree, KNN, SVM, XGBoost, Random Forest  
+- **Validation:** 5-fold cross-validation  
+
+---
+
+### Results
+- **Best (0.89–0.93):** Decision Tree, XGBoost, Random Forest  
+- **Lower (~0.76):** Logistic Regression, KNN, SVM  
+
+---
+
+### Relevance
+- Shows pipeline: **motion → features → ML classification**  
+- Good reference for **model selection & comparison**
+
 ## Source 1: Automated Rowing Event Assignment: A Machine Learning Approach
 
 **Authors:** Yumeng Li, Rachel M. Koldenhoven, Nigel C. Jiwan, Jieyun Zhan & Ting Liu (2025)  
