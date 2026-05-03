@@ -21,6 +21,7 @@ Approaches and solutions that have been applied in similar projects.
   - **Relation to the Project**:
     - Example for a pipeline: **motion → features → ML classification**  
     - Reference for **model selection & comparison**
+    - **Limitation**: use of on-body sensor instead of video analysis --> look for studies using MediaPipe or sim.
       
 ---
 
@@ -28,8 +29,21 @@ Approaches and solutions that have been applied in similar projects.
 
   - **Objective**: Distinguishing between experienced and novice rowers 
   - **Methods**:
+    - ML recognizing two main phases of a stroke: drive and recovery
+    - measuring: Absolute Angle + Stroke Timing Consistency; therefore:
+      - developed quantitative model in which the reference angles for a certain positions in the stroke phase are defined
+      - rower's stroke rates are compared to fix stroke rates depending on strokes per minutes (20 and 30)
+    - **only** one experienced rower as reference rower (due to limited data)
+    - **ML**:
+      - KNN, WEKA for Analysis
+      - performance evaluation: Matthew Correlation Coefficient (MCC)
   - **Outcomes**:
+    - differences between experienced and novice rowers in stroke timing consistency
+    - no differences: absolute posture angles
   - **Relation to the Project**:
+    - same Goal: differentiating good vs. bad rowing technique --> bias in Bosch et al.: study assumes that inexperienced rowers will not perform the rowing technique in an optimal way compared to an experienced rower
+    - **Limitation**: use of on-body sensor instead of video analysis --> look for studies using MediaPipe or sim.
+
 
 ---
 
