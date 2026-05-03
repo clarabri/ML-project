@@ -57,24 +57,20 @@ Approaches and solutions that have been applied in similar projects.
     - transfer learning models: InceptionResNetV2, InceptionV3, VGG16, and NASNetMobile
     - CNN for yoga pose classification
   - **Outcomes**: Skeletonization significantly improves performance + proposed model **YogaConvo2d** benefits the most (+~10%)  
+  - **Model Performance Comparison**
 
-### Model Performance Comparison
+    | Rank | Model                  | Accuracy (Skeletonized) | Accuracy (Non-Skeletonized) |
+    |------|------------------------|--------------------------|------------------------------|
+    | 1    | YogaConvo2d (proposed) | **99.62%**               | 89.9%                        |
+    | 2    | VGG16                  | 97.36%                   | **95.6%**                    |
+    | 3    | InceptionResNetV2      | 96.6%                    | 89.3%                        |
+    | 4    | NASNetMobile           | 96.23%                   | 94.31%                       |
+    | 5    | InceptionV3            | 95.09%                   | 94.98%                       |
 
-| Rank | Model                  | Accuracy (Skeletonized) | Accuracy (Non-Skeletonized) |
-|------|------------------------|--------------------------|------------------------------|
-| 1    | YogaConvo2d (proposed) | **99.62%**               | 89.9%                        |
-| 2    | VGG16                  | 97.36%                   | **95.6%**                    |
-| 3    | InceptionResNetV2      | 96.6%                    | 89.3%                        |
-| 4    | NASNetMobile           | 96.23%                   | 94.31%                       |
-| 5    | InceptionV3            | 95.09%                   | 94.98%                       |
-
----
-
-### Key Insight
-- Skeletonization improves performance across models  
-- **YogaConvo2d** shows the strongest gain and overall best result  
-
-
+    - **Key Insight**:
+    - Skeletonization improves performance across models  
+    - **YogaConvo2d** shows the strongest gain and overall best result
+      
   - **Relation to the Project**:
     - reference for data handling and pipeline
   
