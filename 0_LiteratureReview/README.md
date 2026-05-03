@@ -58,9 +58,7 @@ Approaches and solutions that have been applied in similar projects.
     - CNN for yoga pose classification
   - **Outcomes**: Skeletonization significantly improves performance + proposed model **YogaConvo2d** benefits the most (+~10%)  
 
-Model Performance Comparison
-
-## Model Performance Comparison
+### Model Performance Comparison
 
 | Rank | Model                  | Accuracy (Skeletonized) | Accuracy (Non-Skeletonized) |
 |------|------------------------|--------------------------|------------------------------|
