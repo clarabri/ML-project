@@ -7,9 +7,8 @@ Approaches and solutions that have been applied in similar projects.
 
 ---
 
-## Source 1
+## Source 1: Automated Rowing Event Assignment: A Machine Learning Approach
 
-**Title:** Automated Rowing Event Assignment: A Machine Learning Approach  
 **Authors:** Yumeng Li, Rachel M. Koldenhoven, Nigel C. Jiwan, Jieyun Zhan & Ting Liu (2025)  
 **Journal:** *Sports Biomechanics*, 24(12), 3557–3569  
 
@@ -73,9 +72,8 @@ The following supervised ML models were used:
 
 ---
 
-## Source 2
+## Source 2: Analysis of indoor rowing motion using wearable inertial sensors
 
-**Title:** Analysis of indoor rowing motion using wearable inertial sensors
 **Authors:** Bosch, S., Shoaib, M., Geerlings, S., Buit, L., Meratnia, N., & Havinga, P. (2015)
 **Journal:** In Proceedings of the 10th EAI International Conference on Body Area Networks
 
