@@ -2,5 +2,4 @@
 
 ## To-Dos:
 
-Mediapipe: Convert Videos into Skeletons without background
-
+Improve Dataset Quality
