@@ -1,3 +1,6 @@
 video_name,duration_s,OG_fps,reduced_fps,OG_total_frames,reduced_total_frames,n_strokes,stroke_rate_spm
 cla-BAD,50.6,30,10,1518,506,21,24.9
 cla-GOOD-fast,209.3,30,10,6280,2094,88,25.2
+cla-GOOD-slow,189.9,30,10,5698,1900,68,21.5
+mar-GOOD-fast,140.6,30,10,4217,1406,62,26.5
+mar-GOOD-slow,135.9,30,10,4076,1359,51,22.5
