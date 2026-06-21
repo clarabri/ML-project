@@ -1,0 +1,18 @@
+# Core data & ML stack
+numpy
+pandas
+scikit-learn
+scipy
+
+# Plotting / visualization
+matplotlib
+seaborn
+Pillow
+
+# Pose extraction from videos (1_DatasetCharacteristics/Data_Preparation/Mediapipe.ipynb)
+mediapipe
+opencv-python
+
+# Notebook environment
+jupyter
+ipykernel
