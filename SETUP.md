@@ -30,12 +30,3 @@ Neu registrieren (falls nötig):
 .venv/bin/python -m ipykernel install --user --name ml-project --display-name "Python (ML-project)"
 ```
 
-## Hinweis zu Dateipfaden
-
-Die Notebooks enthalten teilweise hartcodierte absolute Pfade
-(z.B. `/Users/clarabrilke/...`). Diese müssen auf relative Pfade
-umgestellt werden, damit der Code auch hier läuft, z.B.:
-
-```python
-DATA_PATH = Path("1_DatasetCharacteristics/landmarks/landmarks_all_10fps.csv")
-```
