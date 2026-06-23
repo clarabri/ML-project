@@ -163,3 +163,4 @@ cython_debug/
 # This prevents anything under `1_DatasetCharacteristics/Data/` from being added to git.
 /1_DatasetCharacteristics/Data/OG_Videos/
 /1_DatasetCharacteristics/Data/skeleton_frames/
+/1_DatasetCharacteristics/Data/skeleton_videos/
