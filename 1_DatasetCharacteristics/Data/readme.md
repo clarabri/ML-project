@@ -1,0 +1,1 @@
+The data is stored privately, as the videos were recorded with the assurance that they would not be published.
