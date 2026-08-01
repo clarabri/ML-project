@@ -13,6 +13,11 @@ Pillow
 mediapipe
 opencv-python
 
+# LSTM autoencoder + hyperparameter search (3_Model/model_definition_evaluation.ipynb)
+# NOTE: tensorflow requires Python <= 3.12 — see SETUP.md
+tensorflow
+optuna
+
 # Notebook environment
 jupyter
 ipykernel

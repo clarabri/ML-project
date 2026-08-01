@@ -1,9 +1,19 @@
 # Environment Setup
 
+## 0. Python-Version
+
+**Python 3.11 oder 3.12.** TensorFlow (für den LSTM-Autoencoder in
+`3_Model/model_definition_evaluation.ipynb`) unterstützt 3.13+ noch nicht — mit einer
+neueren Version schlägt `pip install -r requirements.txt` fehl.
+
+```bash
+python3.11 --version   # oder python3.12
+```
+
 ## 1. Virtuelles Environment erstellen & Pakete installieren
 
 ```bash
-python -m venv .venv
+python3.11 -m venv .venv
 .venv/bin/python -m pip install --upgrade pip
 .venv/bin/python -m pip install -r requirements.txt
 ```
