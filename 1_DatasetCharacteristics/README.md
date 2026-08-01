@@ -6,14 +6,15 @@
 
 ### Dataset Source
 - **Dataset Link:** The data is stored privately, as the videos were recorded with the assurance that they would not be published.
-- **Dataset Owner/Contact:** xx
-- **Origin:** Self-recorded rowing-ergometer videos of several rowers, filmed from the side under consistent conditions (camera angle, lighting). Pose landmarks were extracted with the **MediaPipe Pose Landmarker**.
+- **Dataset Owner/Contact:** Clara B.
+- **Origin:** Self-recorded rowing-ergometer videos of 4 rowers (`cla`, `man`, `mar`, `sim`), filmed from the side under consistent conditions (camera angle, lighting). Ten videos are 30 fps, `man-GOOD-slow-MIRRORED-7.5min` is 25 fps and was filmed from the opposite side (x-coordinates are mirrored during preprocessing). Pose landmarks were extracted with the **MediaPipe Pose Landmarker**.
 
 ### Dataset Characteristics
-- **Number of Observations:** 42,109 frames (rows) in the combined dataset `landmarks/normalized/landmarks_all_norm_10fps.csv`
-  - **Temporal resolution:** 10 fps (downsampled from the original 30 fps) → 4,210.9 s ≈ **70 minutes** of movement data from **12 videos**
-  - Segmented into **1,427 rowing strokes** (1,351 GOOD / 76 BAD), mean stroke rate ≈ **21 spm** (range 16.6 – 24.9 spm), see the note on `stroke_rate_spm` under [Data quality notes](#data-quality-notes)
+- **Number of Observations:** 18,139 frames (rows), from **11 videos**
+  - **Temporal resolution:** 10 fps (downsampled from the source material; 52,249 original frames) → 1,816.9 s ≈ **30 minutes** of movement data
+  - Segmented into **657 rowing strokes** (578 GOOD / 79 BAD), mean stroke rate ≈ **22 spm** (range 18.4 – 26.0, weighted 21.7). The `-fast` videos average 24.8 spm against 20.8 for `-slow`
   - **0 frames without a detected pose** — MediaPipe found a person in every frame
+  - No single video dominates: the largest (`man-GOOD-slow-MIRRORED-7.5min`) contributes 24.6 % of the frames, the remaining ten between 1.9 % and 13.6 %
 - **Number of Features:** 66 numeric landmark features per frame (33 landmarks × 2 coordinates), plus 3 label columns (`phase`, `GOOD`, `BAD`) → 69 columns in total
 
 ### Target Variable/Label
@@ -32,9 +33,9 @@ The dataset carries **two** labels, serving two different tasks:
 
   | Phase | Frames | Share |
   |---|---:|---:|
-  | 1 – recovery | 24,834 | 59.0 % |
-  | 2 – drive | 16,672 | 39.6 % |
-  | 0 – unknown | 603 | 1.4 % |
+  | 1 – recovery | 10,537 | 58.1 % |
+  | 2 – drive | 7,271 | 40.1 % |
+  | 0 – unknown | 331 | 1.8 % |
 
   Recovery being somewhat longer than the drive is biomechanically plausible.
 
@@ -42,7 +43,7 @@ The dataset carries **two** labels, serving two different tasks:
 - **Label Name:** `GOOD` / `BAD` (mutually exclusive one-hot pair)
 - **Label Type:** Binary classification
 - **Label Description:** Whether the stroke was rowed with correct or with deliberately faulty technique.
-- **Label Distribution:** 39,990 GOOD frames vs. 2,119 BAD frames (95.0 % / 5.0 %) — i.e. 1,351 vs. 76 strokes. **Strongly imbalanced.**
+- **Label Distribution:** 16,020 GOOD frames vs. 2,119 BAD frames (88.3 % / 11.7 %) — i.e. 578 vs. 79 strokes. 
 
 ### Feature Description
 
@@ -62,14 +63,14 @@ The dataset carries **two** labels, serving two different tasks:
 | [Data/skeleton_videos/](Data/skeleton_videos/) | skeleton overlay videos |
 | [landmarks/normalized/](landmarks/normalized/) | per-video `…-landmarks-raw.csv` / `…-landmarks-norm.csv` (30 fps) and `…_10fps.csv` variants, plus `…-strokes.csv` with the stroke boundaries |
 | `landmarks/normalized/landmarks_all_norm_10fps.csv` | **combined dataset used for the EDA and for modelling** |
-| [dataset_documentation.csv](dataset_documentation.csv) | per-video metadata: duration, fps, frame counts, frames without pose, stroke count, stroke rate |
+| [dataset_documentation.csv](dataset_documentation.csv) | per-video metadata: duration, fps, frame counts, frames without pose, `n_peaks` (detected finishes), `n_strokes` (segmented), stroke rate |
 
 ## Exploratory Data Analysis
 
 The exploratory data analysis is conducted in the [exploratory_data_analysis.ipynb](exploratory_data_analysis.ipynb) notebook, which includes:
 
 - **Dataset overview** — per-video table (duration, fps, frames, strokes, stroke rate) and GOOD/BAD stroke counts
-- **Missing value analysis** — **no missing values**; 0 columns with NaN, 0 frames without a detected pose
+- **Missing value analysis** — no missing *feature* values (0 columns with NaN, 0 frames without a detected pose), but a per-video breakdown of missing *labels*: unsegmented strokes and `phase = 0` frames
 - **Feature distributions** — histograms of the key shoulder and hip landmarks
 - **Phase distribution** — absolute frame counts per phase and hip-x distribution split by phase
 - **Correlation analysis** — heatmap over key landmarks and `phase`
@@ -81,34 +82,39 @@ The exploratory data analysis is conducted in the [exploratory_data_analysis.ipy
 
 **Phase separability.** Recovery and drive occupy clearly distinguishable hip-x ranges. The `phase` label is therefore directly separable from the landmark data — a positive signal for the modelling step.
 
-**Correlations.** Hip-x and shoulder-x correlate measurably with `phase`, i.e. the horizontal body swing genuinely carries the phase information. Between landmarks: `left_shoulder_x` ↔ `right_shoulder_x` ≈ 1.00 and `left_hip_x` ↔ `right_hip_x` ≈ 1.00 (left/right move in sync — strong redundancy), `shoulder_x` ↔ `hip_x` ≈ 0.95+ (upper body and hips swing as one unit). The x/y cross-correlations are weaker than in the raw data, as intended by the normalization.
+**Correlations.** Between landmarks the structure is as expected: `left_shoulder_x` ↔ `right_shoulder_x` = 0.91 and `left_hip_x` ↔ `right_hip_x` = 0.91 (left/right move largely in sync — substantial redundancy), `left_shoulder_x` ↔ `left_hip_x` = 0.98 (upper body and hips swing as one unit). The x/y cross-correlations are weaker than in the raw data, as intended by the normalization.
+
+Linear correlations **with `phase`, however, are weak throughout** — the largest is `left_wrist_y` at −0.40, followed by `right_shoulder_y` (−0.23); hip-x and shoulder-x reach only −0.10 to −0.07. Two conclusions follow:
+
+- The **hands carry more phase signal than the torso**, which fits rowing: the seat moves during both phases, the hands reverse direction at catch and finish.
+- Pearson correlation is the wrong instrument here. Recovery and drive traverse the *same* positional range in opposite directions, so a linear coefficient against an ordinal label largely cancels out. The clear separation in the phase-wise hip-x histogram shows the information is present — it lies in the **direction of movement (velocity), not in position**. Derived features (differences between consecutive frames) or sequence models are therefore likely to outperform per-frame position features.
 
 <a id="data-quality-notes"></a>
-### Data quality notes on `dataset_documentation.csv`
+### Data quality
 
-Two columns of the metadata file are inconsistent with the actual landmark files. The landmark CSVs are authoritative — their 10 fps frame counts sum to exactly 42,109, matching the combined dataset.
-
-- **`stroke_rate_spm` is inflated.** For 10 of the 12 videos the value is exactly **3× the true stroke rate** (the 30 fps / 10 fps factor was applied by mistake), for the two `MIRRORED` videos ≈ 2.1×. Recomputed from stroke count and true duration, the rates are **16.6 – 24.9 spm (mean ≈ 20.9, weighted 20.3)** instead of the listed 49.7 – 74.8 spm. The corrected range is the physiologically plausible one for steady-state rowing.
-- **`duration_s` / `reduced_frames` are wrong for the two `MIRRORED` videos.** `man-GOOD-slow-MIRRORED-40min` lists 2,000.2 s / 1,900 reduced frames but actually contributes 23,970 frames ≈ 2,397 s (≈ 40 min); `man-GOOD-slow-MIRRORED-7.5min` lists 374.7 s but contributes 4,463 frames ≈ 446.3 s. Both `duration_s` values were derived from `original_frames / 30`, which does not hold after mirroring.
+- **No missing values:** 0 columns with NaN, 0 frames without a detected pose.
+- **Consistent:** the 11 per-video CSVs sum to exactly 18,139 rows, matching the combined file, and `dataset_documentation.csv` agrees with the per-video stroke files.
+- **Labels:** 668 detected finish peaks yield 657 strokes. The 11 losses are structural — a stroke spans two consecutive finishes, so each video's last peak opens none. 331 frames (1.8 %) carry `phase = 0`, all at the video edges.
 
 ## Dataset Limitations
 
 **Advantages of the controlled setup**
 - Consistent recording conditions (camera angle, lighting)
 - Body-relative normalization removes camera position as a confounding factor
-- Stroke segmentation at true stroke boundaries yields clean per-stroke sequences
 - Complete pose detection — no gaps to interpolate
+- Balanced video mix — no recording dominates the dataset
+- Clean stroke segmentation at true stroke boundaries, with 98.2 % of frames labelled
 
 **Limitations**
-- **Class imbalance:** only 76 BAD vs. 1,351 GOOD strokes (5.0 % of frames). This affects threshold selection and evaluation metrics; precision on the BAD class may be unstable.
-- **Small subject pool:** few recorded rowers — risk of overfitting to their individual movement patterns.
-- **Limited error types:** the BAD class covers only a narrow range of technique faults.
-- **Dominant single video:** `man-GOOD-slow-MIRRORED-40min` contributes 23,970 of the 42,109 frames (57 %), so one rower dominates the GOOD class.
-- **Narrow stroke-rate range:** all recordings sit between ≈ 17 and 25 spm; higher race rates are not represented, even though the file names distinguish "fast" and "slow".
-- **Redundant features:** left/right landmark pairs are almost perfectly correlated (≈ 1.00) — the effective dimensionality is well below 66.
+- **Class imbalance:** 79 BAD vs. 578 GOOD strokes (11.7 % of frames). This affects threshold selection and evaluation metrics; precision on the BAD class may be unstable.
+- **Small subject pool:** only 4 rowers — risk of overfitting to their individual movement patterns. Both BAD recordings come from a single rower (`cla`), so "bad technique" and "this person" are confounded.
+- **Limited error types:** the BAD class covers only a narrow range of technique faults, from two recordings.
+- **Narrow stroke-rate range:** all recordings sit between 18.4 and 26.0 spm; higher race rates are not represented.
+- **Missing labels, not missing features:** 331 frames (1.8 %) carry `phase = 0`, all of them at the video edges. 17,808 frames are usable for supervised phase classification, and the discarded remainder carries no systematic bias.
+- **Small overall size:** ≈ 30 minutes of material / 657 strokes is little for sequence models — augmentation or transfer learning may be needed.
+- **Redundant features:** left/right landmark pairs are highly correlated (≈ 0.91) — the effective dimensionality is well below 66.
 - **2D only:** no depth information; movement components perpendicular to the camera plane are not captured.
 
 **Next steps**
 - Record more rowers to improve generalization
-- Add more BAD strokes and further error types to balance the technique classes
-- Fix `stroke_rate_spm` and the `MIRRORED` durations in `dataset_documentation.csv`
+- Add more BAD strokes and further error types, ideally from several rowers, to break the subject/class confound
